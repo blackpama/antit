@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Escape, Format, and Upload</title>
+    <style>
+        #box {
+            border: 1px solid white;
+            width: 90vw;
+            margin: auto;
+            position: relative;
+            display: flex;
+            flex-wrap: nowrap;
+            margin-bottom: 20px;
+            background: black;
+            overflow-x: auto;
+            border-radius: 10px;
+            height: 400px;
+            color: white;
+            outline: none;
+            padding-left: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea class="response" id="box" wrap="off" placeholder="Enter your text here"></textarea>
+
+    <!-- Add an input element for uploading HTML content -->
+    <input type="file" id="htmlFile" accept=".html">
+    <br><br>
+    <button id="formatButton" onclick="formatAndCopy()">Format</button>
+    <button id="escapeButton" onclick="escapeAndCopy()">Escape </button>
+    <button id="resetButton" onclick="resetInput()">Reset</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.13.0/beautify-html.min.js"></script>
+
+    <script>
+        function formatAndCopy() {
+            const box = document.getElementById("box");
+            const currentText = box.value;
+            const formattedText = html_beautify(currentText, {
+                indent_size: 3, // Adjust the indent size as needed
+                wrap_line_length: 0
+            });
+            box.value = formattedText;
+            copyToClipboard(formattedText);
+        }
+
+        function escapeAndCopy() {
+            const box = document.getElementById("box");
+            const escapedCode = htmlEscape(box.value);
+            box.value = escapedCode;
+            copyToClipboard(escapedCode);
+        }
+
+        function htmlEscape(text) {
+            return text.replace(/[<>&]/g, function(tag) {
+                const replacements = {
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '&': '&amp;'
+                };
+                return replacements[tag] || tag;
+            });
+        }
+
+
+
+        function resetInput() {
+            const box = document.getElementById("box");
+            box.value = '';
+            box.style.overflowX = 'auto';
+            document.getElementById("htmlFile").value = ''; // Reset the file input
+        }
+
+        const htmlFileInput = document.getElementById('htmlFile');
+        const textArea = document.getElementById('box');
+
+        htmlFileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                textArea.value = e.target.result;
+            };
+
+            reader.readAsText(file);
+        });
+    </script>
+</body>
+
+</html>

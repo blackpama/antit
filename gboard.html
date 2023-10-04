@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enclosed Alphanumeric Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #inputText,
+        #outputText {
+            border: 1px solid black;
+            font-size: 20px;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #outputText {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Enclosed Alphanumeric Converter</h1>
+    <input type="text" id="inputText" placeholder="Enter text">
+    <div class="copyable" id="outputText"></div>
+
+    <script>
+        function convertToEnclosed(text) {
+            const letterMapping = {
+                'A': '@',
+                'B': ';',
+                'C': "'",
+                'D': '₹',
+                'E': '|',
+                'F': '_',
+                'G': '&',
+                'H': '-',
+                'I': '>',
+                'J': '+',
+                'K': '(',
+                'L': ')',
+                'M': '?',
+                'N': '!',
+                'O': '{',
+                'P': '}',
+                'Q': '%',
+                'R': '=',
+                'S': '#',
+                'T': '[',
+                'U': '<',
+                'V': ':',
+                'W': '\\',
+                'X': '"',
+                'Y': ']',
+                'Z': '*',
+
+                '1': '¹',
+                '2': '²',
+                '3': '⅗',
+                '4': '⁴',
+                '5': '⁵',
+                '6': '⁶',
+                '7': '⅞',
+                '8': '⁸',
+                '9': '⁹',
+                '0': '⁰',
+                '*': '‎',
+                '?': 'ㅤ',
+            };
+
+            const convertedText = text.toUpperCase().split('').map(char => letterMapping[char] || char).join('');
+            return convertedText;
+        }
+
+        document.getElementById("inputText").addEventListener("input", function() {
+            const inputText = this.value;
+            const outputText = convertToEnclosed(inputText);
+            document.getElementById("outputText").textContent = outputText;
+        });
+    </script>
+    <script>
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains('copyable')) {
+                const temp = document.createElement('textarea');
+                temp.value = event.target.textContent;
+                document.body.appendChild(temp);
+                temp.select();
+                document.execCommand('copy');
+                document.body.removeChild(temp);
+
+                // Add CSS styles directly to the element
+                event.target.style.cssText = 'opacity: 0.5; color: red; border: none;';
+
+                // Reset the styles after 1 second
+                setTimeout(() => {
+                    event.target.style.cssText = ''; // Reset all styles
+
+                }, 1000);
+            }
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>

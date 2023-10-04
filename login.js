@@ -1,0 +1,12 @@
+function _0x2ace(_0xee2cf6, _0x40ae2f) { var _0x431d20 = _0x431d(); return _0x2ace = function(_0x2ace0d, _0x3ee535) { _0x2ace0d = _0x2ace0d - 0xd7; var _0x41ae0d = _0x431d20[_0x2ace0d]; return _0x41ae0d; }, _0x2ace(_0xee2cf6, _0x40ae2f); }(function(_0x5d88d0, _0x56518d) { var _0xf352b9 = _0x2ace,
+        _0x7b6339 = _0x5d88d0(); while (!![]) { try { var _0x19eb66 = parseInt(_0xf352b9(0xe4)) / 0x1 * (parseInt(_0xf352b9(0xda)) / 0x2) + -parseInt(_0xf352b9(0xe6)) / 0x3 * (-parseInt(_0xf352b9(0xea)) / 0x4) + -parseInt(_0xf352b9(0xdb)) / 0x5 + parseInt(_0xf352b9(0xdc)) / 0x6 + -parseInt(_0xf352b9(0xd8)) / 0x7 * (parseInt(_0xf352b9(0xdf)) / 0x8) + parseInt(_0xf352b9(0xe9)) / 0x9 + -parseInt(_0xf352b9(0xe0)) / 0xa; if (_0x19eb66 === _0x56518d) break;
+            else _0x7b6339['push'](_0x7b6339['shift']()); } catch (_0x5cfd48) { _0x7b6339['push'](_0x7b6339['shift']()); } } }(_0x431d, 0x2ea11), document['addEventListener']('DOMContentLoaded', function() { var _0x202140 = _0x2ace,
+        _0x3b776a = document[_0x202140(0xdd)](_0x202140(0xec));
+    _0x3b776a[_0x202140(0xe1)](_0x202140(0xd7), function() { var _0x558a43 = _0x202140,
+            _0x2351ad = document['querySelector'](_0x558a43(0xe7))[_0x558a43(0xeb)],
+            _0x1aec95 = document['querySelector'](_0x558a43(0xe2))[_0x558a43(0xeb)]; if (_0x2351ad === 'p' && _0x1aec95 === 'q') window[_0x558a43(0xd9)]['href'] = 'https://www.block-disposable-email.com/cms/';
+        else { if (_0x2351ad === 'pp' && _0x1aec95 === 'qq') window[_0x558a43(0xd9)][_0x558a43(0xe5)] = _0x558a43(0xe3);
+            else _0x2351ad === _0x558a43(0xde) && _0x1aec95 === 'yadav' ? window['location']['href'] = _0x558a43(0xe8) : alert('Access\x20denied'); } }); }));
+
+function _0x431d() { var _0x252f68 = ['input[type=\x22password\x22]', 'https://antit.neocities.org/pgl', '41PLQidz', 'href', '6CGMiHa', 'input[type=\x22text\x22]', 'https://zoya01.neocities.org/', '3281733zASVjV', '319868eusrtW', 'value', 'login_button', 'click', '68243saNlmm', 'location', '11434QAFhEb', '1120390bWQPXl', '1961232iCgEtC', 'getElementById', 'Shalini', '24IEkVfI', '6415220XWibdf', 'addEventListener'];
+    _0x431d = function() { return _0x252f68; }; return _0x431d(); }

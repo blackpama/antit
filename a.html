@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Animation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/javascript.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/humanoid-dark.min.css" integrity="sha512-VpzmzXvIXjYfKE4xjvTjF41gt15bbXf3u0CDWXDm105TA7yphqLSVqAc+gnpJswiS068uRYqiXCC4MvCycjQhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .git {
+            /*   for link  */
+            display: block;
+            width: 90%;
+            color: white;
+            margin: auto;
+            border-radius: 40px;
+            padding-top: 15px;
+            text-decoration: none;
+            height: 40px;
+            text-align: center;
+            margin-top: 30px;
+            border: 1px solid white;
+        }
+
+
+        .response {
+            border: 1px solid white;
+            width: 90vw;
+            margin: auto;
+            position: relative;
+            display: flex;
+            flex-wrap: nowrap;
+            /* Prevent wrapping of boxes when scrolling horizontally */
+            margin-bottom: 20px;
+            background: black;
+            overflow-x: auto;
+            /* Enable horizontal scrolling */
+            border-radius: 10px;
+            max-height: 40vh;
+            color: white;
+            padding-left: 14px;
+        }
+
+
+        /* Styles for the copy button */
+        .copy-button {
+            position: sticky;
+            top: 10px;
+            right: 10px;
+            height: 25px;
+            padding: 4px 8px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+
+    <style>
+        html {
+            box-sizing: border-box;
+            background: #000;
+            color: white;
+        }
+
+
+        .accordion-button {
+            margin: 20px;
+            width: 85vw;
+            background-color: dodgerblue;
+            color: white;
+            border: none;
+            border-radius: 55px;
+            height: 55px;
+            /* Set a fixed height for the button */
+        }
+
+
+        .accordion-button:hover {
+            background-color: saddlebrown;
+        }
+
+
+        .container {
+            max-width: 100vw;
+            overflow: hidden;
+            transition: max-height 0.6s ease-out;
+            /* Use max-height for smooth transition */
+        }
+
+
+        .container.closed {
+            max-height: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <!--      Start       -->
+    <div class="accordion">
+        <button class="accordion-button" onclick="toggleContainer(this)"> This accordion code without box </button>
+        <div class="container closed">
+            <div class="response">
+                <pre><code style="background: black;" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+   &lt;head&gt;
+      &lt;meta charset="UTF-8"&gt;
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+      &lt;title&gt;CSS Animation&lt;/title&gt;
+      &lt;style&gt;
+      
+         html {
+         box-sizing: border-box;
+         background: #000;
+         color: white;
+         }
+         
+         .git{
+         /*   for link  */
+         display: block;
+         width: 90%;
+         color: white;
+         margin: auto;
+         border-radius: 40px;
+         padding-top: 15px;
+         text-decoration: none;
+         height: 40px;
+         text-align: center;
+         margin-top: 30px;
+         border: 1px solid white;
+         }
+         
+      
+         .accordion-button {
+        
+         width: 95vw;
+         margin-bottom: 20px;
+         margin-top: 20px;
+         border-radius: 50px;
+         background-color: dodgerblue;
+         color: white;
+         border: none;
+         height: 50px; /* Set a fixed height for the button */
+         }
+         
+         
+         .accordion-button:hover {
+         background-color: saddlebrown;
+         }
+         
+         
+         .container {
+         max-width: 100vw;
+         overflow: hidden;
+         transition: max-height 0.6s ease-out; /* Use max-height for smooth transition */
+         }
+         
+         
+         .container.closed {
+         max-height: 0;
+         }
+      &lt;/style&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+     
+     
+           &lt;!--          start          --&gt;
+
+     
+      &lt;div class="accordion"&gt;
+         &lt;button class="accordion-button" onclick="toggleContainer(this)"&gt;Toggle Container 1&lt;/button&gt;
+         &lt;div class="container closed"&gt;
+            &lt;p&gt;This is some content inside the first container.&lt;/p&gt;
+            &lt;pre&gt;
+
+            &lt;/pre&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+      
+      
+      
+      &lt;!--           end           --&gt;
+
+      
+      
+      
+      &lt;!--          start          --&gt;
+      
+      
+      
+      &lt;div class="accordion"&gt;
+         &lt;button class="accordion-button" onclick="toggleContainer(this)"&gt;Link&lt;/button&gt;
+         &lt;div class="container closed"&gt;
+            &lt;a href="" class="git"&gt;link 1&lt;/a&gt;
+            &lt;a href="" class="git"&gt;link 2&lt;/a&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+      
+      
+      
+            &lt;!--           end           --&gt;
+
+
+
+
+
+
+
+ 
+   
+                
+      
+      
+      &lt;!-- 
+         **********************
+         iske phle sb Krna hai 
+         
+         **********************
+         
+         
+         --&gt;    
+      &lt;div style="height: 50vh;"&gt;&lt;/div&gt;
+      &lt;script&gt;
+         function toggleContainer(button) {
+             const container = button.nextElementSibling;
+             const isOpen = !container.classList.contains('closed');
+         
+             if (isOpen) {
+                 // Container is open, so just close it without scrolling
+                 container.style.maxHeight = '0';
+                 container.classList.add('closed');
+             } else {
+                 // Calculate the container's current scroll height before opening
+                 const currentScrollHeight = container.scrollHeight;
+         
+                 // Open the container
+                 container.style.maxHeight = currentScrollHeight + 'px';
+                 container.classList.remove('closed');
+             }
+         }
+         
+         
+             
+      &lt;/script&gt;
+        &lt;script&gt;
+    function toggleContainer(button) {
+      const container = button.nextElementSibling;
+      const isOpen = !container.classList.contains('closed');
+
+      if (isOpen) {
+        // Container is open, so just close it without scrolling
+        container.style.maxHeight = '0';
+        container.classList.add('closed');
+        // Set button color to default when closing
+        button.style.backgroundColor = 'dodgerblue';
+      } else {
+        // Calculate the container's current scroll height before opening
+        const currentScrollHeight = container.scrollHeight;
+
+        // Open the container
+        container.style.maxHeight = currentScrollHeight + 'px';
+        container.classList.remove('closed');
+        // Change button color when opening
+        button.style.backgroundColor = 'grey';
+      }
+    }
+  &lt;/script&gt;
+
+   &lt;/body&gt;
+&lt;/html&gt;
+ 
+   
+                </code></pre>
+                <button class="copy-button">Copy. </button>
+            </div>
+            <br>
+        </div>
+    </div>
+
+
+
+
+    <!--      End       -->
+
+
+
+
+
+
+
+    <!--      Start       -->
+    <div class="accordion">
+        <button class="accordion-button" onclick="toggleContainer(this)"> This accordion code with box</button>
+        <div class="container closed">
+            <div class="response">
+                <pre><code style="background: black;" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+   &lt;head&gt;
+      &lt;meta charset="UTF-8"&gt;
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+      &lt;title&gt;CSS Animation&lt;/title&gt;
+      &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"&gt;&lt;/script&gt;
+      &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/javascript.min.js"&gt;&lt;/script&gt;
+      &lt;script&gt;
+         hljs.highlightAll();
+      &lt;/script&gt;
+      &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/humanoid-dark.min.css" integrity="sha512-VpzmzXvIXjYfKE4xjvTjF41gt15bbXf3u0CDWXDm105TA7yphqLSVqAc+gnpJswiS068uRYqiXCC4MvCycjQhg==" crossorigin="anonymous" referrerpolicy="no-referrer" /&gt;
+      &lt;style&gt;
+      
+         .response {
+         border: 1px solid white;
+         width: 90vw;
+         margin: auto;
+         position: relative;
+         display: flex;
+         flex-wrap: nowrap; /* Prevent wrapping of boxes when scrolling horizontally */
+         margin-bottom: 20px;
+         background: black;
+         overflow-x: auto; /* Enable horizontal scrolling */
+         border-radius: 10px;
+         max-height: 40vh;
+         color: white;
+         padding-left: 14px;
+         }
+         
+         
+         .git{
+         /*   for link  */
+         display: block;
+         width: 90%;
+         color: white;
+         margin: auto;
+         border-radius: 40px;
+         padding-top: 15px;
+         text-decoration: none;
+         height: 40px;
+         text-align: center;
+         margin-top: 30px;
+         border: 1px solid white;
+         }
+         
+         
+         /* Styles for the copy button */
+         .copy-button {
+         position: sticky;
+         top: 10px;
+         right: 10px;
+         height: 25px;
+         padding: 4px 8px;
+         border: none;
+         border-radius: 4px;
+         background-color: #007bff;
+         color: #fff;
+         cursor: pointer;
+         }
+         
+      &lt;/style&gt;
+      
+      &lt;style&gt;
+      
+         html {
+         box-sizing: border-box;
+         background: #000;
+         color: white;
+         }
+         
+        
+         .accordion-button {
+         margin: 20px;
+         width: 85vw;
+         border-radius: 50px;
+         background-color: dodgerblue;
+         color: white;
+         border: none;
+         height: 50px; /* Set a fixed height for the button */
+         }
+         
+         
+         .accordion-button:hover {
+         background-color: saddlebrown;
+         }
+         
+         
+         .container {
+         max-width: 100vw;
+         overflow: hidden;
+         transition: max-height 0.6s ease-out; /* Use max-height for smooth transition */
+         }
+         
+         
+         .container.closed {
+         max-height: 0;
+         }
+         
+      &lt;/style&gt;
+      
+   &lt;/head&gt;
+   &lt;body&gt;
+     
+      &lt;!--          start          --&gt;
+
+
+
+      &lt;div class="accordion"&gt;
+         &lt;button class="accordion-button" onclick="toggleContainer(this)"&gt;Box&lt;/button&gt;
+         &lt;div class="container closed"&gt;
+            &lt;div class="response"&gt;
+               &lt;pre&gt;&lt;code style="background: black;" class="language-html"&gt;
+                 
+
+               &lt;/code&gt;&lt;/pre&gt;
+               &lt;button class="copy-button"&gt;Copy.    &lt;/button&gt;
+            &lt;/div&gt;
+            &lt;br&gt;
+            &lt;br&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+      
+       &lt;!--           end           --&gt;
+     
+      
+      
+      
+      
+      
+      
+      
+      &lt;!--          start          --&gt;
+
+      
+      
+      &lt;div class="accordion"&gt;
+         &lt;button class="accordion-button" onclick="toggleContainer(this)"&gt;Simple&lt;/button&gt;
+         &lt;div class="container closed"&gt;
+            &lt;p&gt;This is some content inside the first container.&lt;/p&gt;
+            &lt;pre&gt;
+                .
+                .
+                .
+            &lt;/pre&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+      
+      
+      &lt;!--           end           --&gt;
+
+
+
+
+
+
+
+
+      
+      
+      &lt;!--          start          --&gt;
+      
+      
+      
+      &lt;div class="accordion"&gt;
+         &lt;button class="accordion-button" onclick="toggleContainer(this)"&gt;Link&lt;/button&gt;
+         &lt;div class="container closed"&gt;
+            &lt;a href="" class="git"&gt;link 1&lt;/a&gt;
+            &lt;a href="" class="git"&gt;link 2&lt;/a&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+      
+      
+      
+            &lt;!--           end           --&gt;
+
+
+
+
+
+
+
+
+
+      &lt;!-- 
+         **********************
+         iske phle sb Krna hai 
+         
+         **********************
+         
+         
+         --&gt;    
+      &lt;div style="height: 50vh;" &gt;&lt;/div&gt;
+      &lt;script&gt;
+         function toggleContainer(button) {
+             const container = button.nextElementSibling;
+             const isOpen = !container.classList.contains('closed');
+         
+             if (isOpen) {
+                 // Container is open, so just close it without scrolling
+                 container.style.maxHeight = '0';
+                 container.classList.add('closed');
+             } else {
+                 // Calculate the container's current scroll height before opening
+                 const currentScrollHeight = container.scrollHeight;
+         
+                 // Open the container
+                 container.style.maxHeight = currentScrollHeight + 'px';
+                 container.classList.remove('closed');
+             }
+         }
+         
+         
+             
+      &lt;/script&gt;
+      &lt;script&gt;
+         function copyResponseText() {
+           const responseTextElement = this.previousElementSibling;
+           const textToCopy = responseTextElement.innerText;
+         
+          
+           const tempTextArea = document.createElement('textarea');
+           tempTextArea.value = textToCopy;
+           document.body.appendChild(tempTextArea);
+         
+         
+           tempTextArea.select();
+           document.execCommand('copy');
+         
+           
+           document.body.removeChild(tempTextArea);
+         
+         
+           this.innerText = 'Copied!';
+           setTimeout(() =&gt; {
+             this.innerText = 'Copy';
+           }, 2000);
+         }
+         
+         
+         const copyButtons = document.querySelectorAll('.copy-button');
+         copyButtons.forEach((button) =&gt; {
+           button.addEventListener('click', copyResponseText);
+         });
+      &lt;/script&gt;
+        &lt;script&gt;
+    function toggleContainer(button) {
+      const container = button.nextElementSibling;
+      const isOpen = !container.classList.contains('closed');
+
+      if (isOpen) {
+        // Container is open, so just close it without scrolling
+        container.style.maxHeight = '0';
+        container.classList.add('closed');
+        // Set button color to default when closing
+        button.style.backgroundColor = 'dodgerblue';
+      } else {
+        // Calculate the container's current scroll height before opening
+        const currentScrollHeight = container.scrollHeight;
+
+        // Open the container
+        container.style.maxHeight = currentScrollHeight + 'px';
+        container.classList.remove('closed');
+        // Change button color when opening
+        button.style.backgroundColor = 'grey';
+      }
+    }
+  &lt;/script&gt;
+
+   &lt;/body&gt;
+&lt;/html&gt;
+ 
+   
+                </code></pre>
+                <button class="copy-button">Copy. </button>
+            </div>
+            <br>
+        </div>
+    </div>
+
+
+
+    <!--      End       -->
+
+
+    <!--      Start       -->
+
+
+
+
+
+    <textarea class="response" id="box" style="height:300px; outline: none;padding-top: 20px;" wrap="off" placeholder="Enter your text here"></textarea>
+    <button id="escapeButton" onclick="escapeAndCopy()">Escape and Copy</button>
+
+    <button id="resetButton" onclick="resetInput()">Reset</button>
+
+
+    <!--      End       -->
+
+
+
+
+
+
+
+
+
+
+    <!--      Start       -->
+
+
+    <div class="accordion">
+        <button class="accordion-button" onclick="toggleContainer(this)"> Simple accordion add </button>
+        <div class="container closed">
+            <div class="response">
+                <pre><code style="background: black;" class="language-html">      &lt;!--           start           --&gt;
+      
+      
+      
+      &lt;div class="accordion"&gt;
+         &lt;button class="accordion-button" onclick="toggleContainer(this)"&gt;  Name    &lt;/button&gt;
+         &lt;div class="container closed"&gt;
+            &lt;p&gt;This is some content inside  container.&lt;/p&gt;
+            
+                    
+                    
+
+              
+         &lt;/div&gt;
+      &lt;/div&gt;
+      
+      &lt;!--         end           --&gt;
+      
+      
+      
+      
+      
+      
+
+ 
+   
+                </code></pre>
+                <button class="copy-button">Copy. </button>
+            </div>
+            <br>
+        </div>
+    </div>
+
+
+
+
+    <!--      End       -->
+
+
+
+
+
+
+
+    <!--      Start       -->
+    <div class="accordion">
+        <button class="accordion-button" onclick="toggleContainer(this)"> Box wala accordon add </button>
+        <div class="container closed">
+            <div class="response">
+                <pre><code style="background: black;" class="language-html">      &lt;!--      Start       --&gt;
+               
+               
+               
+      &lt;div class="accordion"&gt;
+         &lt;button class="accordion-button" onclick="toggleContainer(this)"&gt;   Name   &lt;/button&gt;
+         &lt;div class="container closed"&gt;
+            &lt;div class="response"&gt;
+               &lt;pre&gt;&lt;code style="background: black;" class="language-html"&gt;
+ 
+   
+                &lt;/code&gt;&lt;/pre&gt;
+               &lt;button class="copy-button"&gt;Copy.    &lt;/button&gt;
+            &lt;/div&gt;
+            &lt;br&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;!--      End       --&gt;
+
+ 
+   
+   
+   
+   
+                </code></pre>
+                <button class="copy-button">Copy. </button>
+            </div>
+            <br>
+        </div>
+    </div>
+    <!--      End       -->
+
+
+
+
+
+
+
+    <!--          start          -->
+
+
+
+
+
+    <div class="accordion">
+        <button class="accordion-button" onclick="toggleContainer(this)">Links</button>
+        <div class="container closed">
+            <a href="" class="git">link 1</a>
+            <a href="" class="git">link 2</a>
+        </div>
+    </div>
+
+
+
+
+    <!--           end           -->
+
+
+
+
+
+    <!--      Start       -->
+
+
+
+
+    <div class="accordion">
+        <button class="accordion-button" onclick="toggleContainer(this)"> Link add krne ke liye accordion </button>
+        <div class="container closed">
+            <div class="response">
+                <pre><code style="background: black;" class="language-html">      &lt;!--          start          --&gt;
+      
+      
+      
+      &lt;div class="accordion"&gt;
+         &lt;button class="accordion-button" onclick="toggleContainer(this)"&gt;  Links  &lt;/button&gt;
+         &lt;div class="container closed"&gt;
+            &lt;a href="" class="git"&gt;link 1&lt;/a&gt;
+            &lt;a href="" class="git"&gt;link 2&lt;/a&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+      
+      
+      
+            &lt;!--           end           --&gt;
+
+
+
+
+
+
+
+ 
+   
+                </code></pre>
+                <button class="copy-button">Copy. </button>
+            </div>
+            <br>
+        </div>
+    </div>
+
+
+
+
+
+    <!--      End       -->
+
+
+
+
+    <!--      Start       -->
+
+
+
+    <div class="accordion">
+        <button class="accordion-button" onclick="toggleContainer(this)"> Code for hilight js fast input </button>
+        <div class="container closed">
+            <div class="response">
+                <pre><code style="background: black;" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Syntax Highlighting&lt;/title&gt;
+    &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/humanoid-dark.min.css" integrity="sha512-VpzmzXvIXjYfKE4xjvTjF41gt15bbXf3u0CDWXDm105TA7yphqLSVqAc+gnpJswiS068uRYqiXCC4MvCycjQhg==" crossorigin="anonymous" referrerpolicy="no-referrer" /&gt;
+    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"&gt;&lt;/script&gt;
+    &lt;style&gt;
+        .editor-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 80vw;
+            min-height: 130px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            overflow: auto;
+            background: black;
+            color: white;
+            margin: auto;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            max-height: 40vw;
+        }
+
+        code {
+            white-space: pre;
+            overflow-wrap: normal;
+            word-break: normal;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="editor-container fakeTextarea" contenteditable="true" spellcheck="false"&gt;&lt;/div&gt;
+    &lt;br&gt;
+    &lt;div class="editor-container fakeTextarea" contenteditable="true" spellcheck="false"&gt;&lt;/div&gt;
+    &lt;br&gt;
+    &lt;div class="editor-container fakeTextarea" contenteditable="true" spellcheck="false"&gt;&lt;/div&gt;
+    &lt;br&gt;
+    &lt;div class="editor-container fakeTextarea" contenteditable="true" spellcheck="false"&gt;&lt;/div&gt;
+
+    &lt;script&gt;
+        hljs.initHighlightingOnLoad();
+
+        const fakeTextareas = document.querySelectorAll('.fakeTextarea');
+
+        // Add an input event listener with debounce to apply syntax highlighting
+        fakeTextareas.forEach(textarea =&gt; {
+            let debounceTimer;
+            textarea.addEventListener('input', () =&gt; {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() =&gt; {
+                    highlightCode(textarea);
+                }, 100); // Delay for 500ms after the last input
+            });
+        });
+
+        // Function to apply syntax highlighting
+        function highlightCode(textarea) {
+            const codeContent = textarea.innerText;
+            textarea.innerHTML = `&lt;code&gt;${hljs.highlightAuto(codeContent).value}&lt;/code&gt;`;
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+ 
+   
+                </code></pre>
+                <button class="copy-button">Copy. </button>
+            </div>
+            <br>
+        </div>
+    </div>
+    <!--      End       -->
+
+
+
+
+
+
+
+
+
+
+    <a href="#" class="git">link</a>
+
+
+
+
+
+
+
+
+
+
+    <!-- 
+         **********************
+         iske phle sb Krna hai 
+         
+         **********************
+         
+         
+         -->
+    <div style="height: 50vh;"></div>
+    <script>
+        function toggleContainer(button) {
+            const container = button.nextElementSibling;
+            const isOpen = !container.classList.contains('closed');
+
+            if (isOpen) {
+                // Container is open, so just close it without scrolling
+                container.style.maxHeight = '0';
+                container.classList.add('closed');
+            } else {
+                // Calculate the container's current scroll height before opening
+                const currentScrollHeight = container.scrollHeight;
+
+                // Open the container
+                container.style.maxHeight = currentScrollHeight + 'px';
+                container.classList.remove('closed');
+            }
+        }
+    </script>
+    <script>
+        function copyResponseText() {
+            const responseTextElement = this.previousElementSibling;
+            const textToCopy = responseTextElement.innerText;
+
+
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = textToCopy;
+            document.body.appendChild(tempTextArea);
+
+
+            tempTextArea.select();
+            document.execCommand('copy');
+
+
+            document.body.removeChild(tempTextArea);
+
+
+            this.innerText = 'Copied!';
+            setTimeout(() => {
+                this.innerText = 'Copy';
+            }, 2000);
+        }
+
+
+        const copyButtons = document.querySelectorAll('.copy-button');
+        copyButtons.forEach((button) => {
+            button.addEventListener('click', copyResponseText);
+        });
+    </script>
+    <script>
+        function escapeAndCopy() {
+            const box = document.getElementById("box");
+            const escapedCode = htmlEscape(box.value);
+            box.value = escapedCode;
+            copyToClipboard(escapedCode);
+        }
+
+        function htmlEscape(text) {
+            return text.replace(/[<>&]/g, function(tag) {
+                const replacements = {
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '&': '&amp;'
+                };
+                return replacements[tag] || tag;
+            });
+        }
+
+        function copyToClipboard(text) {
+            const el = document.createElement("textarea");
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand("copy");
+            document.body.removeChild(el);
+        }
+
+
+
+        function resetInput() {
+            const box = document.getElementById("box");
+            box.value = '';
+            box.style.overflowX = 'auto'; // Reset horizontal scrollbar to auto
+        }
+    </script>
+    <script>
+        function toggleContainer(button) {
+            const container = button.nextElementSibling;
+            const isOpen = !container.classList.contains('closed');
+
+            if (isOpen) {
+                // Container is open, so just close it without scrolling
+                container.style.maxHeight = '0';
+                container.classList.add('closed');
+                // Set button color to default when closing
+                button.style.backgroundColor = 'dodgerblue';
+            } else {
+                // Calculate the container's current scroll height before opening
+                const currentScrollHeight = container.scrollHeight;
+
+                // Open the container
+                container.style.maxHeight = currentScrollHeight + 'px';
+                container.classList.remove('closed');
+                // Change button color when opening
+                button.style.backgroundColor = 'grey';
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>

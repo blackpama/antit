@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Text Converter</title>
+    <style>
+        #output {
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Circle Text Converter</h1>
+    <label for="inputWord">Enter a word:</label>
+    <input type="text" id="inputWord">
+    <label for="circleCount">Number of circles:</label>
+    <input type="number" id="circleCount" min="0" value="0">
+    <br>
+    <div id="output"></div>
+
+    <script>
+        function convertText() {
+            const inputWord = document.getElementById("inputWord").value;
+            const circleCount = document.getElementById("circleCount").valueAsNumber;
+            const outputDiv = document.getElementById("output");
+
+            let convertedText = "";
+            for (let i = 0; i < inputWord.length; i++) {
+                convertedText += inputWord[i];
+                convertedText += "ꠋ".repeat(circleCount);
+            }
+
+            outputDiv.textContent = convertedText;
+        }
+
+        // Listen for input changes and update the conversion
+        document.getElementById("inputWord").addEventListener("input", convertText);
+        document.getElementById("circleCount").addEventListener("input", convertText);
+    </script>
+</body>
+
+</html>

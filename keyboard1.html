@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta charset="UTF-8">
+    <title>Keyboard</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        /*general stylings*/
+        * {
+            zoom: none;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+        body {
+            background: #1a1a1c;
+            /* Background color from the second example */
+
+        }
+
+        a {
+            text-decoration: none;
+            color: #364047;
+        }
+
+        li {
+            list-style: none;
+            float: left;
+        }
+
+        p {
+            color: #364047;
+        }
+
+        table {
+            width: 100%;
+            table-layout: fixed
+        }
+
+        .active {
+            display: block !important;
+        }
+
+        /*end general stylings*/
+
+        #keyboard {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 10px 1%;
+
+            font-weight: 200;
+            overflow: auto;
+
+            background: #1a1a1c;
+            /* Background color from the second example */
+
+        }
+
+        #keyboard ul li {
+            width: 8.5vw;
+            height: 11vw;
+
+
+            box-shadow: 0px 3px 3px rgba(0, 0, 0, .7);
+
+            margin: 1.3% .65%;
+            font-size: 7vw;
+            text-align: center;
+            line-height: 11vw;
+            color: #71D4FE;
+            box-shadow: 0px 3px 3px rgba(0, 0, 0, .7);
+            color: #71D4FE;
+
+            border-radius: 9px;
+        }
+
+        #keyboard ul li .off {
+            display: none;
+        }
+
+        #keyboard ul li .on {
+            display: block;
+        }
+
+        #keyboard ul li img {
+            height: 6.5vw;
+            /*width:8vw;*/
+            position: relative;
+            top: 1.5vw;
+        }
+
+        .num-key {
+            display: none;
+        }
+
+        #keyboard ul li:active,
+        .key-2:active {}
+
+        #keyboard ul li:hover {
+            background: #2F3336;
+            text-shadow: 1px 2px 10px #00BCD4, 0px 0px 10px rgba(0, 188, 212, .9);
+
+
+
+            background: #616161;
+            /* Hover color from the second example */
+            text-shadow: 1px 2px 10px #00BCD4, 0px 0px 10px rgba(0, 188, 212, .9);
+        }
+
+
+        .keyline2 {
+            padding: 0 4.25vw;
+        }
+
+        .keyline3 {
+            padding: 0 6vw;
+        }
+
+        .key-2 {
+            width: 11vw !important;
+            height: 11vw !important;
+            line-height: 12vw !important;
+
+        }
+
+        .key-2:active {
+            background: #212121 !important;
+        }
+
+        .space {
+            width: 65vw !important;
+
+            text-transform: lowercase;
+        }
+
+        .return {
+            width: 22vw !important;
+
+            text-transform: lowercase;
+        }
+
+        .change-keys {
+            font-size: 5vw !important;
+            line-height: 11vw;
+        }
+
+        #screen {
+            width: 95%;
+            margin: 30px 2.5%;
+            height: 23vh;
+            background: #cdc;
+            border: solid 6px #004;
+            border-radius: 20px;
+            padding: 2vw;
+            font-size: 6vw;
+            font-weight: 400;
+        }
+
+        /*toggled classes*/
+        .big-del {
+            width: 17vw !important;
+            margin-left: 2% !important;
+        }
+
+        .no-padding {
+            padding: 0 !important;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <html lang="en">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <title>Mobile Keyboard</title>
+
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    </head>
+
+    <body>
+
+        <textarea id="screen" style="" placeholder="Your text goes here"></textarea>
+
+        <div id="keyboard">
+            <ul>
+                <div class="keyline1">
+                    <li><span class="on">q</span> <span class="off">1</span> </li>
+                    <li><span class="on">w</span> <span class="off">2</span> </li>
+                    <li><span class="on">e</span> <span class="off">3</span> </li>
+                    <li><span class="on">r</span> <span class="off">+</span> </li>
+                    <li><span class="on">t</span> <span class="off">-</span> </li>
+                    <li><span class="on">y</span> <span class="off">@</span> </li>
+                    <li><span class="on">u</span> <span class="off">$</span> </li>
+                    <li><span class="on">i</span> <span class="off">(</span> </li>
+                    <li><span class="on">o</span> <span class="off">)</span> </li>
+                    <li><span class="on">p</span> <span class="off">\</span> </li>
+                </div>
+
+
+                <div class="keyline2">
+                    <li><span class="on">a</span> <span class="off">4</span> </li>
+                    <li><span class="on">s</span> <span class="off">5</span> </li>
+                    <li><span class="on">d</span> <span class="off">6</span> </li>
+                    <li><span class="on">f</span> <span class="off">*</span> </li>
+                    <li><span class="on">g</span> <span class="off">/</span> </li>
+                    <li><span class="on">h</span> <span class="off">'</span> </li>
+                    <li><span class="on">j</span> <span class="off">"</span> </li>
+                    <li><span class="on">k</span> <span class="off">:</span> </li>
+                    <li><span class="on">l</span> <span class="off">;</span> </li>
+                    <li class="num-key"><span class="off">#</span></li>
+                </div>
+
+
+                <li id="uppercase" onclick="uppercaser()" style="margin-right:3.7vw;" class="key-2">
+                    <span class="on"><i class="fa fa-arrow-up"></i></span>
+                    <span class="off"><i class="fa fa-arrow-down"></i></span>
+                </li>
+
+                <div class="keyline3">
+                    <li><span class="on">z</span> <span class="off">7</span> </li>
+                    <li><span class="on">x</span> <span class="off">8</span> </li>
+                    <li><span class="on">c</span> <span class="off">9</span> </li>
+                    <li><span class="on">v</span> <span class="off">,</span> </li>
+                    <li><span class="on">b</span> <span class="off">=</span> </li>
+                    <li><span class="on">n</span> <span class="off">!</span> </li>
+                    <li><span class="on">m</span> <span class="off">?</span> </li>
+                    <li class="num-key"><span class="off">^</span></li>
+                </div>
+
+                <li id="delete" style="margin-left:3.7vw;" class="key-2">
+                    <span><i class="fa fa-arrow-left"></i></span>
+                </li>
+
+                <li class="key-2 change-keys">
+                    <span class="on">123</span> <span class="off">abc</span>
+                </li>
+
+                <li class="key-2">
+                    <span class="on"><i class="far fa-smile"></i></span>
+                    <span class="off">0</span>
+                </li>
+
+
+
+                <li class="space"><span>space</span> </li>
+
+            </ul>
+        </div>
+
+    </body>
+
+    </html>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script>
+        // changing keyboard characters
+        function keysChange() {
+
+            $('#keyboard ul li .on').toggle();
+
+            $('#keyboard ul li .off').toggle();
+            $('#keyboard ul li .off').toggleClass('active');
+
+            $('.keyline2, .keyline3').toggleClass('no-padding')
+
+            $('#uppercase').toggle();
+
+            $('.num-key').toggle();
+            $('#delete').toggleClass('big-del');
+
+        };
+
+        //uppercasing characters
+        function uppercaser() {
+            $('#keyboard').toggleClass('uppercase');
+
+            $('#uppercase .on').toggle();
+            $('#uppercase .off').toggle();
+        }
+
+        $('#keyboard li').on('click', function() {
+
+            var screen = $('#screen');
+            //screen.focus();
+
+            var key = $(this).find('span');
+            var keyvalue = key.html();
+
+            if ($('#keyboard').hasClass('uppercase')) {
+                keyvalue = keyvalue.toUpperCase();
+            }
+
+            if ($(this).hasClass('change-keys')) {
+
+                keysChange();
+            }
+
+            //backspace function
+            else if ($(this).attr('id') == 'delete') {
+
+                screen.html((screen.html().slice(0, -1)));
+                return;
+            }
+
+            //for first faze characters
+            else if (key.css("display") == "block") {
+
+                screen.append(keyvalue);
+            }
+
+            //for second faze characters
+            else {
+                screen.append($(this).find('.active').html());
+            }
+
+            //for spacing
+            if ($(this).hasClass('space')) {
+                screen.append(' ');
+            }
+
+        });
+    </script>
+</body>
+
+</html>

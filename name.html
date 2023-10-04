@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enclosed Alphanumeric Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #inputText,
+        #outputText,
+        #styledOutput {
+            font-size: 20px;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #convertButton {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #outputText {
+            font-weight: bold;
+        }
+
+        #styledOutput {
+            font-size: 24px;
+        }
+
+        /* Style for the response box */
+        .response-box {
+            width: 90vw;
+            margin: auto;
+            position: relative;
+            display: flex;
+            flex-wrap: nowrap;
+            margin-bottom: 20px;
+            border: 2px solid gray;
+            background: #f5f5f5;
+            overflow-x: auto;
+            border-radius: 10px;
+            background: #000;
+            max-height: 40vh;
+            color: white;
+        }
+
+        code {
+            font-size: 0.1px;
+        }
+
+        .response-box pre {
+            font-size: 0.2px;
+            white-space: pre-wrap;
+            margin: 0;
+        }
+
+        .copy-button {
+            position: sticky;
+            top: 10px;
+            right: 10px;
+            height: 25px;
+            padding: 4px 8px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <h1>Enclosed Alphanumeric Converter</h1>
+
+
+
+
+
+
+
+
+
+    <input type="text" id="inputText" placeholder="Enter text">
+    <button id="convertButton">Convert</button>
+    <div class="response-box">
+        <pre id="outputText"></pre>
+        <button class="copy-button" onclick="copyResponseText(this)">Copy</button>
+    </div>
+    <div class="response-box">
+        <pre style="font-size: 15px;
+        outline: none;" contenteditable="true" id="styledOutput"></pre>
+        <button class="copy-button" onclick="copyResponseText(this)">Copy</button>
+    </div>
+
+    <br> <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div style="width: 100px; background: white; color: black;" class="response-box">
+        <pre style=" width: 50px;">
+          'ꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋꠋ'๋ࣧ͜͡𖣔ꠋꠋꠋꠋꠋꠋꠋ
+        </pre>
+        <button style="margin: 0;" class="copy-button" onclick="copyResponseText(this)">Copy</button>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <script>
+        function convertToEnclosed(text) {
+            const letterMapping = {
+                'A': '🄰',
+                'B': '🄱',
+                'C': '🄲',
+                'D': '🄳',
+                'E': '🄴',
+                'F': '🄵',
+                'G': '🄶',
+                'H': '🄷',
+                'I': '🄸',
+                'J': '🄹',
+                'K': '🄺',
+                'L': '🄻',
+                'M': '🄼',
+                'N': '🄽',
+                'O': '🄾',
+                'P': '🄿',
+                'Q': '🅀',
+                'R': '🅁',
+                'S': '🅂',
+                'T': '🅃',
+                'U': '🅄',
+                'V': '🅅',
+                'W': '🅆',
+                'X': '🅇',
+                'Y': '🅈',
+                'Z': '🅉',
+            };
+
+            const convertedText = text.toUpperCase().split('').map(char => letterMapping[char] || char).join('');
+            return convertedText;
+        }
+
+        function copyResponseText(button) {
+            const responseTextElement = button.previousElementSibling;
+            const textToCopy = responseTextElement.innerText;
+
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = textToCopy;
+            document.body.appendChild(tempTextArea);
+
+            tempTextArea.select();
+            document.execCommand('copy');
+
+            document.body.removeChild(tempTextArea);
+
+            button.innerText = 'Copied!';
+            setTimeout(() => {
+                button.innerText = 'Copy';
+            }, 2000);
+        }
+
+        document.getElementById("convertButton").addEventListener("click", function() {
+            const inputText = document.getElementById("inputText").value;
+            const outputText = convertToEnclosed(inputText);
+            const styledOutputText = `꧁𓊈𒆜${outputText}𒆜𓊉꧂`;
+            document.getElementById("outputText").textContent = outputText;
+            document.getElementById("styledOutput").textContent = styledOutputText;
+        });
+    </script>
+</body>
+
+</html>

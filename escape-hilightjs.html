@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Syntax Highlighting</title>
+    <!-- Include highlight.js library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/humanoid-dark.min.css" integrity="sha512-VpzmzXvIXjYfKE4xjvTjF41gt15bbXf3u0CDWXDm105TA7yphqLSVqAc+gnpJswiS068uRYqiXCC4MvCycjQhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+    <style>
+
+        .editor-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 100vw;
+            height: 130vw;
+            font-family: monospace;
+            white-space: pre-wrap;
+            overflow: auto;
+            background: black;
+            color: white;
+            margin: auto;
+        }
+
+        button {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            /* Adjust the right property for spacing between buttons */
+            transform: translateY(-50%);
+        }
+
+        button:nth-child(2) {
+            top: calc(50% - 50px);
+            /* Adjust the vertical spacing */
+        }
+
+        button:nth-child(3) {
+            top: calc(50% - 100px);
+            /* Adjust the vertical spacing */
+        }
+
+
+        .editor {
+            outline: none;
+        }
+
+        code {
+            white-space: pre;
+            overflow-wrap: normal;
+            word-break: normal;
+        }
+
+        .escape-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="editor-container" contenteditable="true" id="fakeTextarea" spellcheck="false" oninput="highlightCode()"></div>
+    <button class="escape-btn" onclick="escapeCode()">Escape</button>
+    <button class="escape-btn" onclick="formatCode()">Format</button>
+    <button class="escape-btn" onclick="resetInput()">Reset</button>
+
+    <script>
+        function highlightCode() {
+            const fakeTextarea = document.getElementById('fakeTextarea');
+            const codeContent = fakeTextarea.innerText;
+            fakeTextarea.innerHTML = `<code>${hljs.highlightAuto(codeContent).value}</code>`;
+        }
+
+        function escapeCode() {
+            const fakeTextarea = document.getElementById("fakeTextarea");
+            const escapedCode = htmlEscape(fakeTextarea.innerText);
+            fakeTextarea.innerText = escapedCode;
+            copyToClipboard(escapedCode);
+            highlightCode(); // Re-highlight the escaped code
+        }
+
+        function formatCode() {
+            const fakeTextarea = document.getElementById("fakeTextarea");
+            const formattedCode = formatSourceCode(fakeTextarea.innerText);
+            fakeTextarea.innerText = formattedCode;
+            fakeTextarea.style.overflowX = 'auto'; // Enable horizontal scrollbar after formatting
+            copyToClipboard(formattedCode);
+            highlightCode(); // Re-highlight the formatted code
+        }
+
+        function htmlEscape(text) {
+            return text.replace(/[<>&]/g, function(tag) {
+                const replacements = {
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '&': '&amp;'
+                };
+                return replacements[tag] || tag;
+            });
+        }
+
+        function copyToClipboard(text) {
+            const el = document.createElement("textarea");
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand("copy");
+            document.body.removeChild(el);
+        }
+
+        function formatSourceCode(code) {
+            const tabSize = 2;
+            const lines = code.split('\n');
+            let formattedCode = '';
+            let indent = 0;
+
+            lines.forEach((line, index) => {
+                line = line.trim();
+
+                if (line.endsWith('}')) {
+                    indent -= tabSize;
+                }
+
+                formattedCode += ' '.repeat(indent) + line + '\n';
+
+                if (line.endsWith('{')) {
+                    indent += tabSize;
+                }
+            });
+
+            return formattedCode.trim();
+        }
+
+        function resetInput() {
+            const fakeTextarea = document.getElementById("fakeTextarea");
+            fakeTextarea.innerText = '';
+            fakeTextarea.style.overflowX = 'auto'; // Reset horizontal scrollbar to auto
+        }
+
+        let cursorPosition = 0;
+
+        document.getElementById('fakeTextarea').addEventListener('keydown', function(e) {
+            cursorPosition = window.getSelection().getRangeAt(0).startOffset;
+        });
+
+        document.getElementById('fakeTextarea').addEventListener('blur', function(e) {
+            const selection = window.getSelection();
+            const range = document.createRange();
+            range.setStart(this.firstChild, cursorPosition);
+            range.collapse(true);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        });
+
+        // Call highlightCode initially to highlight any initial content in the "textarea"
+        highlightCode();
+    </script>
+</body>
+
+</html>

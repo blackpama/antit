@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/humanoid-dark.min.css" integrity="sha512-VpzmzXvIXjYfKE4xjvTjF41gt15bbXf3u0CDWXDm105TA7yphqLSVqAc+gnpJswiS068uRYqiXCC4MvCycjQhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/javascript.min.js"></script>
+
+
+    <script>
+        hljs.highlightAll();
+    </script>
+
+    <style>
+        .response {
+            width: 90vw;
+            margin: auto;
+            position: relative;
+            display: flex;
+            flex-wrap: nowrap;
+            /* Prevent wrapping of boxes when scrolling horizontally */
+            margin-bottom: 20px;
+            background: black;
+            overflow-x: auto;
+            /* Enable horizontal scrolling */
+            border-radius: 10px;
+            max-height: 40vh;
+            color: white;
+            padding-left: 14px;
+        }
+
+        /* Styles for the copy button */
+        .copy-button {
+            position: sticky;
+            top: 10px;
+            right: 10px;
+            height: 25px;
+            padding: 4px 8px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+
+
+
+
+</head>
+
+<body>
+
+    <h3>Github,Replit,YouTube and google drive</h3>
+    <div class="response">
+        <pre><code style="background: black;" class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+      &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt;
+    &lt;title&gt;Link Converter&lt;/title&gt;
+    &lt;title&gt;Link Converter&lt;/title&gt;
+    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"&gt;&lt;/script&gt;
+        &lt;style&gt;
+        /* Your CSS styles here */
+
+        /* ... */
+                body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0 20px; /* Equal margin from left and right */
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        label, input[type="text"], button, #outputLink, p {
+            margin: 10px 0;
+        }
+
+        input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #outputLink a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+    &lt;/style&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;h1&gt;Link Converter&lt;/h1&gt;
+    &lt;input type="text" id="linkInput" placeholder="Paste Repl.it, GitHub, Google Drive, or YouTube link"&gt;
+    &lt;button id="convertButton"&gt;Convert&lt;/button&gt;
+    &lt;div id="outputLink"&gt;&lt;/div&gt;
+
+    &lt;script&gt;
+        // Function to convert a Google Drive link to the desired format
+        function convertDriveLink(originalLink) {
+            const fileIdRegex = /\/d\/([^/]+)/;
+            const match = originalLink.match(fileIdRegex);
+
+            if (match) {
+                const fileId = match[1];
+                const directDownloadLink = `https://drive.google.com/uc?id=${fileId}&amp;export=download`;
+                return directDownloadLink;
+            } else {
+                return "Invalid Google Drive link";
+            }
+        }
+
+        // Function to perform the link conversion
+        function convertLink(link) {
+            const linkInput = document.getElementById('linkInput');
+            const outputLinkContainer = document.getElementById('outputLink');
+
+            if (link.includes("drive.google.com")) {
+                // Handle Google Drive link conversion
+                const driveText = convertDriveLink(link);
+                if (driveText === "Invalid Google Drive link") {
+                    outputLinkContainer.innerHTML = "Invalid link";
+                } else {
+                    // Display the converted link on the webpage with blue text color
+                    outputLinkContainer.innerHTML = `Converted Google Drive Link: &lt;span id="driveLink" style="color: blue;"&gt;${driveText}&lt;/span&gt;`;
+                    const clipboard = new ClipboardJS('#driveLink', {
+                        text: function () {
+                            return driveText;
+                        }
+                    });
+                    clipboard.on('success', function (e) {
+                        // Clear the selection after copying
+                        e.clearSelection();
+                    });
+                }
+                linkInput.value = ''; // Clear the input field
+            } else if (link.includes("youtube.com") || link.includes("youtu.be")) {
+                // Handle YouTube link conversion
+                const youtubePattern = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|shorts\/|live\/|embed\/|v\/)|youtu\.be\/)([^&amp;?/]+)/i;
+                const youtubeMatch = link.match(youtubePattern);
+
+                if (youtubeMatch) {
+                    const videoId = youtubeMatch[1];
+                    const videoLink = `https://ytload.com/en/download/${videoId}/mp4_18/`;
+                    const audioLink = `https://ytload.com/en/download/${videoId}/mp3_128/`;
+
+                    outputLinkContainer.innerHTML = `
+                        Video: &lt;a href="${videoLink}" target="_blank"&gt;${videoLink}&lt;/a&gt;&lt;br&gt;
+                        Audio: &lt;a href="${audioLink}" target="_blank"&gt;${audioLink}&lt;/a&gt;
+                    `;
+                    linkInput.value = ''; // Clear the input field
+                } else {
+                    outputLinkContainer.innerHTML = "Invalid YouTube link format.";
+                    linkInput.value = ''; // Clear the input field
+                }
+            } else {
+                // Handle Replit and GitHub link conversion
+                const replitPattern = /https:\/\/replit\.com\/@[^/]+\/([^/]+)(?:\?.*)?#([^?]+)/;
+                const githubPattern = /github\.com\/([^/]+)\/([^/]+)\/blob\/main\/(.+)/i;
+                const replitMatch = link.match(replitPattern);
+                const githubMatch = link.match(githubPattern);
+
+                if (replitMatch) {
+                    const placeholder = replitMatch[1];
+                    let path = replitMatch[2];
+                    const username = link.match(/https:\/\/replit\.com\/@([^/]+)/)[1];
+                    if (path.endsWith("index.html")) {
+                        path = path.substring(0, path.length - 10); // Remove "index.html"
+                    }
+                    const alternateLink = `${placeholder}.${username}.repl.co/${path}`;
+                    const fullAlternateLink = "https://" + alternateLink.replace(/\?v=\d+/, "");
+                    outputLinkContainer.innerHTML = `Converted Replit link: &lt;a href="${fullAlternateLink}" target="_blank"&gt;${fullAlternateLink}&lt;/a&gt;`;
+                    linkInput.value = ''; // Clear the input field
+                } else if (githubMatch) {
+                    const username = githubMatch[1];
+                    const repo = githubMatch[2];
+                    let path = githubMatch[3];
+                    if (path.endsWith("index.html")) {
+                        path = path.substring(0, path.length - 10); // Remove "index.html"
+                    }
+                    if (repo.toLowerCase() === `${username}.github.io`) {
+                        outputLinkContainer.innerHTML = `Converted GitHub Link: &lt;a href="https://${username}.github.io/${path}" target="_blank"&gt;https://${username}.github.io/${path}&lt;/a&gt;`;
+                    } else {
+                        const outputLink = `https://${username}.github.io/${repo}/${path}`;
+                        outputLinkContainer.innerHTML = `Converted GitHub Link: &lt;a href="${outputLink}" target="_blank"&gt;${outputLink}&lt;/a&gt;`;
+                    }
+                    linkInput.value = ''; // Clear the input field
+                } else {
+                    outputLinkContainer.innerHTML = "Invalid link format.";
+                    linkInput.value = ''; // Clear the input field
+                }
+            }
+        }
+
+        // Add event listeners for the input field to detect changes and pasted content
+        document.getElementById("linkInput").addEventListener("input", function () {
+            const linkInput = document.getElementById('linkInput');
+            const link = linkInput.value;
+
+            // Automatically trigger the "Convert" button if a YouTube or Google Drive link is detected
+            if (link.includes("youtube.com") || link.includes("youtu.be") || link.includes("drive.google.com")) {
+                document.getElementById("convertButton").click();
+            }
+        });
+
+        // Add an event listener for the "Convert" button
+        document.getElementById("convertButton").addEventListener("click", function () {
+            const linkInput = document.getElementById('linkInput');
+            const link = linkInput.value;
+            convertLink(link);
+        });
+
+    &lt;/script&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+        <button class="copy-button">Copy. </button>
+    </div>
+    <br>
+
+
+
+
+
+    <h3>PW</h3>
+
+    <div class="response">
+        <pre><code style="background: black;" class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt;
+    &lt;title&gt;Link Converter&lt;/title&gt;
+    &lt;style&gt;
+        /* Your existing CSS styles here */
+
+        body {
+            font-family: Arial, sans-serif;
+            /* text-align: center; */
+            margin: 0 20px; /* Equal margin from left and right */
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        label, input[type="text"], button, #outputLink, p {
+            margin: 10px 0;
+        }
+
+        input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #outputLink a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        /* Styles for the Link Converter */
+        .output-link {
+            margin-bottom: 10px; /* Add space between link and quality */
+        }
+
+        .output-link a {
+            color: #007BFF; /* Blue color for links */
+            text-decoration: none;
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        .output-quality {
+            font-weight: bold;
+            color: black; /* Black color for quality text */
+            display: block; /* Display quality text in a new line */
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;h1&gt;Link Converter&lt;/h1&gt;
+    &lt;input type="text" id="linkInput" placeholder="......"&gt;
+    &lt;button id="convertButton" onclick="convertLink()"&gt;Convert&lt;/button&gt;
+    &lt;div id="outputLink"&gt;&lt;/div&gt;
+
+    &lt;script&gt;
+        function convertLink() {
+            const inputLink = document.getElementById('linkInput').value.trim();
+            const output = document.getElementById('outputLink');
+            output.innerHTML = '';
+
+            if (inputLink.includes('cloudfront')) {
+                const videoIdMatch = inputLink.match(/\/([^/]+)\/dash\//);
+
+                if (videoIdMatch &amp;&amp; videoIdMatch.length &gt;= 2) {
+                    const videoId = videoIdMatch[1];
+                    const qualities = ['144', '240', '360', '480', '720'];
+
+                    qualities.forEach(quality =&gt; {
+                        const url = `https://d26g5bnklkwsh4.cloudfront.net/${videoId}/hls/${quality}/main.m3u8`;
+                        const linkElement = document.createElement('p');
+                        linkElement.classList.add('output-link');
+
+                        // Create the quality and link elements
+                        const qualityElement = document.createElement('h3');
+                        qualityElement.classList.add('output-quality');
+                        qualityElement.innerText = `${quality} Quality`;
+
+                        const link = document.createElement('a');
+                        link.href = "#"; // Set href as "#" to prevent link opening
+                        link.innerText = url;
+
+                        // Attach a click event listener to copy the URL to clipboard
+                        link.addEventListener('click', function() {
+                            copyToClipboard(url);
+                        });
+
+                        // Append quality and link to the output element
+                        linkElement.appendChild(qualityElement);
+                        linkElement.appendChild(link);
+                        output.appendChild(linkElement);
+                    });
+                } else {
+                    const invalidLinkText = document.createElement('p');
+                    invalidLinkText.classList.add('output-link');
+                    invalidLinkText.innerText = 'Invalid input link. Please provide a valid link.';
+                    output.appendChild(invalidLinkText);
+                }
+            } else {
+                const noCloudfrontText = document.createElement('p');
+                noCloudfrontText.classList.add('output-link');
+                noCloudfrontText.innerText = 'Input link does not contain "cloudfront".';
+                output.appendChild(noCloudfrontText);
+            }
+        }
+
+        function copyToClipboard(text) {
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+        <button class="copy-button">Copy. </button>
+    </div>
+    <br>
+
+
+
+
+
+
+
+
+
+
+    <h3> Accordon with fixed background img </h3>
+    <div class="response">
+        <pre><code style="background: black;" class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      width: 90vw;
+    }
+        body {
+      background-image: url('/mn-ipacky21-316-kglking-original-imagfu86wushddyn.jpeg'); /* Replace with your image URL */
+      background-size: cover;
+      background-attachment: fixed; /* This makes the background image fixed */
+    }
+    .accordion-item {
+      margin-top: 20px;
+      height: 35px;
+      background-color: transparent;
+      border: 1px solid red;
+      padding: 10px;
+      text-align: center;
+     
+      border-radius: 35px;
+   
+      position: relative;
+    }
+
+
+
+    a {
+      display: block;
+      text-align: center;
+      width: 80vw;
+      margin: auto;
+      margin-top: 30px;
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 10px;
+      border-top: 1px solid #ccc;
+      transition: max-height 0.3s ease-in-out; /* Smooth opening and closing */
+    }
+
+    .active .accordion-content {
+      max-height: 300px; /* Adjust this value based on your content's maximum height */
+    }
+
+
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="accordion"&gt;
+    &lt;div class="accordion-item"&gt;
+      Link 1
+      &lt;div class="accordion-symbol"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="accordion-content"&gt;
+      &lt;a href="#"&gt;Sublink 1.1&lt;/a&gt;
+      &lt;a href="#"&gt;Sublink 1.2&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="accordion-item"&gt;
+      Link 2
+      &lt;div class="accordion-symbol"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="accordion-content"&gt;
+      &lt;a href="#"&gt;Sublink 2.1&lt;/a&gt;
+      &lt;a href="#"&gt;Sublink 2.2&lt;/a&gt;
+      &lt;a href="#"&gt;Sublink 2.3&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href=""&gt;ty&lt;/a&gt;
+      &lt;a href="#"&gt;Sublink 2.4&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    const items = document.querySelectorAll('.accordion-item');
+
+    items.forEach((item) =&gt; {
+      item.addEventListener('click', () =&gt; {
+        const content = item.nextElementSibling;
+
+        if (content.classList.contains('active')) {
+          content.style.maxHeight = '0';
+          content.classList.remove('active');
+        } else {
+          content.style.maxHeight = content.scrollHeight + 'px';
+          content.classList.add('active');
+        }
+      });
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+        <button class="copy-button">Copy. </button>
+    </div>
+    <br>
+
+
+
+
+
+
+
+
+
+
+    <h3> Accordian with animation </h3>
+    <div class="response">
+        <pre><code style="background: black;" class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+    .accordion {
+     width: 90vw;
+      margin: 0 auto;
+    }
+
+    .accordionTitle {
+     
+      background-color: #22313F;
+      border-bottom: 1px solid #2c3e50;
+      cursor: pointer;
+      text-align: center;
+      font-weight: 700;
+      padding: 2em;
+      
+      color: #fff;
+      transition: background-color 0.3s ease-in-out;
+      position: relative;
+      margin: 0;
+    }
+.git{
+  background-color: #22313F;
+  border-bottom: 1px solid #2c3e50;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 700;
+  padding: 30px 30px;
+  width: 75vw;
+  color: #fff;
+  margin: auto;
+}
+    .caret {
+      font-size: 40px;
+      font-stretch: 200%;
+      position: absolute;
+      top: 50%;
+      right: 1em;
+      transform: translateY(-50%);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .rotate {
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    .accordionContent {
+      max-height: 0;
+      overflow: hidden;
+     
+      background-color: #fff;
+      padding: 1em 2em;
+      color: #000;
+      transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+    }
+
+    .accordionTitle.active {
+      background-color: #34495e;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;h1&gt;accordion&lt;/h1&gt;
+  &lt;div class="accordion"&gt;
+    &lt;div class="accordionTitle"&gt;
+      Accordion Title 1
+      &lt;span class="caret"&gt;^&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="accordionContent"&gt;
+      &lt;p&gt;Content for Accordion 1&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      p
+    &lt;/div&gt;
+
+    &lt;div class="accordionTitle"&gt;
+      Accordion Title 2
+      &lt;span class="caret"&gt;^&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="accordionContent"&gt;
+      &lt;p&gt;Content for Accordion 2&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class="accordionTitle"&gt;
+      Accordion Title 3
+      &lt;span class="caret"&gt;^&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="accordionContent"&gt;
+      &lt;p&gt;Content for Accordion 3&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+
+
+    &lt;div class="git"&gt;
+      Accordion Title 2
+   
+    &lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+  &lt;div class="accordion"&gt;
+    &lt;div class="accordionTitle"&gt;
+      Accordion Title 1
+      &lt;span class="caret"&gt;^&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="accordionContent"&gt;
+      &lt;p&gt;Content for Accordion 1&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      &lt;p&gt;show&lt;/p&gt;
+      p
+    &lt;/div&gt;
+
+    &lt;div class="accordionTitle"&gt;
+      Accordion Title 2
+      &lt;span class="caret"&gt;^&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="accordionContent"&gt;
+      &lt;p&gt;Content for Accordion 2&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class="accordionTitle"&gt;
+      Accordion Title 3
+      &lt;span class="caret"&gt;^&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="accordionContent"&gt;
+      &lt;p&gt;Content for Accordion 3&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    document.addEventListener("DOMContentLoaded", function () {
+      const accordionTitles = document.querySelectorAll(".accordionTitle");
+
+      accordionTitles.forEach((title) =&gt; {
+        title.addEventListener("click", () =&gt; {
+          const content = title.nextElementSibling;
+          content.classList.toggle("active");
+
+          if (content.classList.contains("active")) {
+            content.style.maxHeight = content.scrollHeight + "px";
+            title.querySelector(".caret").classList.add("rotate");
+          } else {
+            content.style.maxHeight = "0";
+            title.querySelector(".caret").classList.remove("rotate");
+          }
+        });
+      });
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+
+</code></pre>
+        <button class="copy-button">Copy. </button>
+    </div>
+    <br>
+
+
+
+
+
+
+
+
+
+
+    <h3> best animation accordian </h3>
+    <div class="response">
+        <pre><code style="background: black;" class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;&lt;/title&gt;
+  &lt;style&gt;
+    
+    @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*{
+  /* background: #000; */!important
+}
+body {
+
+  font-family: 'Lato';
+}
+
+h1 {
+  font-size: 2em;
+  padding: 2em;
+  text-align: center;
+}
+
+.accordion dl {
+}
+
+.accordion dt @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lato';
+}
+
+h1 {
+  font-size: 2em;
+  padding: 2em;
+  text-align: center;
+}
+
+.accordion dl {
+}
+
+.accordion dt &gt; a {
+  text-align: center;
+  font-weight: 700;
+  padding: 2em;
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  -webkit-transition: background-color 0.5s ease-in-out;
+}
+.accordion dd {
+  
+  color:#fafafa;
+  font-size: 1em;
+  line-height: 1.5em;
+}
+.accordion dd &gt; p {
+  padding: 1em 2em 1em 2em;
+}
+
+.accordion {
+  position: relative;
+  background-color: #16a085;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2em 0 2em 0;
+}
+
+.accordionTitle:before {
+  content: "+";
+  font-size: 1.5em;
+  line-height: 0.5em;
+  float: left;
+  -moz-transition: -moz-transform 0.3s ease-in-out;
+  -o-transition: -o-transform 0.3s ease-in-out;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}&gt; a {
+  text-align: center;
+  font-weight: 700;
+  padding: 2em;
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  -webkit-transition: background-color 0.5s ease-in-out;
+}
+.gitb{
+  text-align: center;
+  font-weight: 700;
+  padding: 2em;
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  width: 90vw;
+  
+  margin: auto;
+  background-color: #22313F;
+  border-bottom: 1px solid #2c3e50;
+  
+  
+}
+
+.accordionTitle {
+  width: 90vw;
+ 
+  margin: auto;
+  background-color: #22313F;
+  border-bottom: 1px solid #2c3e50;
+}
+
+
+.accordion dd {
+  background-color: white;
+  color:#fafafa;
+  font-size: 1em;
+  margin-left: 0; 
+  margin: 0px 20px;
+  /* jisme sara text hai o black colour */
+  line-height: 1.5em;
+}
+.accordion dd &gt; p {
+  padding: 1em 2em 1em 2em;
+}
+
+.accordion {
+  position: relative;
+  background-color: white; /* gap between those */
+}
+
+.git{
+  display: block;
+  width: 90%;
+  margin: auto;
+  border-radius: 40px;
+  padding-top: 15px;
+  text-decoration: none;
+  height: 60px;
+  text-align: center;
+  margin-top: 30px;
+  border: 1px solid black;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2em 0 2em 0;
+}
+
+.accordionTitle {
+  background-color: #22313F;
+  border-bottom: 1px solid #2c3e50;
+}
+.accordionTitle:before {
+  content: "+";
+  font-size: 1.5em;
+  line-height: 0.5em;
+  float: left;
+  -moz-transition: -moz-transform 0.3s ease-in-out;
+  -o-transition: -o-transform 0.3s ease-in-out;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}
+.accordionTitle:hover {
+  background-color: #2c3e50;
+}
+
+.accordionTitleActive {
+  background-color:#34495e;
+}
+.accordionTitleActive:before {
+  -webkit-transform: rotate(-225deg);
+  -moz-transform: rotate(-225deg);
+  transform: rotate(-225deg);
+}
+
+.accordionItem {
+  height: auto;
+  overflow: hidden;
+}
+@media all {
+  .accordionItem {
+    max-height: 50em;
+    -moz-transition: max-height 1s;
+    -o-transition: max-height 1s;
+    -webkit-transition: max-height 1s;
+    transition: max-height 1s;
+  }
+}
+@media screen and (min-width: 48em) {
+  .accordionItem {
+    max-height: 15em;
+    -moz-transition: max-height 0.5s;
+    -o-transition: max-height 0.5s;
+    -webkit-transition: max-height 0.5s;
+    transition: max-height 0.5s;
+  }
+}
+.accordionItemCollapsed {
+  max-height: 0;
+}
+
+.animateIn {
+  -webkit-animation-name: accordionIn;
+  -webkit-animation-duration: 0.65s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-direction: normal;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: both;
+  -webkit-animation-delay: 0s;
+  -moz-animation-name: normal;
+  -moz-animation-duration: 0.65s;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-direction: alternate;
+  -moz-animation-timing-function: ease-in-out;
+  -moz-animation-fill-mode: both;
+  -moz-animation-delay: 0s;
+  animation-name: accordionIn;
+  animation-duration: 0.65s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+  animation-delay: 0s;
+}
+
+.animateOut {
+  -webkit-animation-name: accordionOut;
+  -webkit-animation-duration: 0.75s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: both;
+  -webkit-animation-delay: 0s;
+  -moz-animation-name: accordionOut;
+  -moz-animation-duration: 0.75s;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-direction: alternate;
+  -moz-animation-timing-function: ease-in-out;
+  -moz-animation-fill-mode: both;
+  -moz-animation-delay: 0s;
+  animation-name: accordionOut;
+  animation-duration: 0.75s;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+  animation-delay: 0s;
+}
+
+@-webkit-keyframes accordionIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+  }
+}
+@-moz-keyframes accordionIn {
+  0% {
+    opacity: 0;
+    -moz-transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    -moz-transform: scale(1);
+  }
+}
+@keyframes accordionIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes accordionOut {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(0.8);
+  }
+}
+@-moz-keyframes accordionOut {
+  0% {
+    opacity: 1;
+    -moz-transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: scale(0.8);
+  }
+}
+@keyframes accordionOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div class="container"&gt;
+          &lt;h1&gt;Simple Flat UI CSS Accordion&lt;/h1&gt;
+          &lt;div class="accordion"&gt;
+     
+
+              &lt;dt&gt;&lt;a href="#" class="accordionTitle"&gt;Test Simple Flat UI CSS Accordion 2&lt;/a&gt;&lt;/dt&gt;
+              &lt;dd class="accordionItem accordionItemCollapsed"&gt;
+                
+&lt;a href=" https://replit.com/@username/boy?v=1#u.html
+  " class="git" target="_blank" &gt;   https://app.tinkerhost.net/index                       zlublkm935@uf.edu.pl  &lt;/a&gt;
+&lt;a href="" class="git"&gt;link 2&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 3&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 4&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 5&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 6&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 7&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 8&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 9&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 10&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 11&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 12&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 13&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 14&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 15&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 16&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 17&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 18&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 19&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 20&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 21&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 22&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 23&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 24&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 25&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 26&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 27&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 28&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 29&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 30&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 31&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 32&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 33&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 34&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 35&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 36&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 37&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 38&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 39&lt;/a&gt;
+&lt;a href="" class="git"&gt;link 40&lt;/a&gt;
+              &lt;/dd&gt;
+              &lt;br&gt;
+              &lt;dt&gt;&lt;a href="#" class="accordionTitle"&gt;Test Simple Flat UI CSS Accordion 3&lt;/a&gt;&lt;/dt&gt;
+              &lt;dd class="accordionItem accordionItemCollapsed"&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+&lt;a href="   " class="git"&gt;    5 &lt;/a&gt;
+&lt;a href="   " class="git"&gt;     &lt;/a&gt;
+&lt;a href="   " class="git"&gt;     &lt;/a&gt;
+&lt;a href="   " class="git"&gt;     &lt;/a&gt;
+&lt;a href="   " class="git"&gt;     &lt;/a&gt;
+&lt;a href="   " class="git"&gt;     &lt;/a&gt;
+&lt;a href="   " class="git"&gt;     &lt;/a&gt;
+&lt;a href="   " class="git"&gt;     &lt;/a&gt;
+&lt;a href="   " class="git"&gt;     &lt;/a&gt;
+
+              &lt;/dd&gt;
+            &lt;/dl&gt;
+            
+            
+            
+                          &lt;br&gt;
+            
+            
+            
+          &lt;/div&gt;
+&lt;/div&gt;
+              &lt;a href="https://youtu.be/ciTmo7K5OVo?feature=shared" class="gitb"&gt;Test Simple Flat UI CSS Accordion 3&lt;/a&gt;
+
+&lt;script&gt;
+  /*!
+ * classie - class helper functions
+ * from bonzo https://github.com/ded/bonzo
+/*!
+ * classie - class helper functions
+ * from bonzo https://github.com/ded/bonzo
+ * 
+ * classie.has( elem, 'my-class' ) -&gt; true/false
+ * classie.add( elem, 'my-new-class' )
+ * classie.remove( elem, 'my-unwanted-class' )
+ * classie.toggle( elem, 'my-class' )
+ */
+
+/*jshint browser: true, strict: true, undef: true */
+/*global define: false */
+( function( window ) {
+'use strict';
+function classReg( className ) {
+  return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
+}
+var hasClass, addClass, removeClass;
+
+if ( 'classList' in document.documentElement ) {
+  hasClass = function( elem, c ) {
+    return elem.classList.contains( c );
+  };
+  addClass = function( elem, c ) {
+    elem.classList.add( c );
+  };
+  removeClass = function( elem, c ) {
+    elem.classList.remove( c );
+  };
+}
+else {
+  hasClass = function( elem, c ) {
+    return classReg( c ).test( elem.className );
+  };
+  addClass = function( elem, c ) {
+    if ( !hasClass( elem, c ) ) {
+      elem.className = elem.className + ' ' + c;
+    }
+  };
+  removeClass = function( elem, c ) {
+    elem.className = elem.className.replace( classReg( c ), ' ' );
+  };
+}
+
+function toggleClass( elem, c ) {
+  var fn = hasClass( elem, c ) ? removeClass : addClass;
+  fn( elem, c );
+}
+var classie = {
+  hasClass: hasClass,
+  addClass: addClass,
+  removeClass: removeClass,
+  toggleClass: toggleClass,
+  has: hasClass,
+  add: addClass,
+  remove: removeClass,
+  toggle: toggleClass
+};
+if ( typeof define === 'function' &amp;&amp; define.amd ) {
+  define( classie );
+} else {
+  window.classie = classie;
+}
+})( window );
+var $ = function(selector){
+  return document.querySelector(selector);
+}
+var accordion = $('.accordion');
+accordion.addEventListener("click",function(e) {
+  e.stopPropagation();
+ 
+  if(e.target &amp;&amp; e.target.nodeName == "A") {
+    var classes = e.target.className.split(" ");
+    if(classes) {
+      for(var x = 0; x &lt; classes.length; x++) {
+        if(classes[x] == "accordionTitle") {
+          var title = e.target;
+          var content = e.target.parentNode.nextElementSibling;
+          classie.toggle(title, 'accordionTitleActive');
+          if(classie.has(content, 'accordionItemCollapsed')) {
+            if(classie.has(content, 'animateOut')){
+              classie.remove(content, 'animateOut');
+            }
+            classie.add(content, 'animateIn');
+          }else{
+             classie.remove(content, 'animateIn');
+             classie.add(content, 'animateOut');
+          }
+          classie.toggle(content, 'accordionItemCollapsed');      
+        }
+      }
+    }  
+  }
+});
+&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+        <button class="copy-button">Copy. </button>
+    </div>
+    <br>
+
+
+
+
+
+
+
+
+
+
+    <h3> Accordon with copy button </h3>
+    <div class="response">
+        <pre><code style="background: black;" class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;meta charset="UTF-8"&gt;
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+      &lt;title&gt;&lt;/title&gt;
+      
+&lt;style&gt;
+  .response {
+    width: 85vw;
+    margin-top: 100px;
+    margin: auto;
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping of boxes when scrolling horizontally */
+    margin-bottom: 20px;
+    background: black;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    border-radius: 10px;
+    max-height: 40vh;
+    color: white;
+    padding-left: 14px;
+  }
+
+  /* Styles for the copy button */
+  .copy-button {
+    position: sticky;
+    top: 10px;
+    right: 10px;
+    height: 25px;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+&lt;/style&gt;
+
+
+
+ 
+      &lt;style&gt;
+         @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+         * {
+         -moz-box-sizing: border-box;
+         -webkit-box-sizing: border-box;
+         box-sizing: border-box;
+         }
+         *{
+         /* background: #000; */!important
+         }
+         body {
+         font-family: 'Lato';
+         }
+         h1 {
+         font-size: 2em;
+         padding: 2em;
+         text-align: center;
+         }
+         .accordion dl {
+         }
+         .accordion dt @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+         * {
+         -moz-box-sizing: border-box;
+         -webkit-box-sizing: border-box;
+         box-sizing: border-box;
+         }
+         body {
+         font-family: 'Lato';
+         }
+         h1 {
+         font-size: 2em;
+         padding: 2em;
+         text-align: center;
+         }
+         .accordion dl {
+         }
+         .accordion dt &gt; a {
+         text-align: center;
+         font-weight: 700;
+         padding: 2em;
+         display: block;
+         text-decoration: none;
+         color: #fff;
+         -webkit-transition: background-color 0.5s ease-in-out;
+         }
+         .accordion dd {
+         color:#fafafa;
+         font-size: 1em;
+         line-height: 1.5em;
+         }
+         .accordion dd &gt; p {
+         padding: 1em 2em 1em 2em;
+         }
+         .accordion {
+         position: relative;
+         background-color: #16a085;
+         }
+         .container {
+         max-width: 960px;
+         margin: 0 auto;
+         padding: 2em 0 2em 0;
+         }
+         .accordionTitle:before {
+         content: "+";
+         font-size: 1.5em;
+         line-height: 0.5em;
+         float: left;
+         -moz-transition: -moz-transform 0.3s ease-in-out;
+         -o-transition: -o-transform 0.3s ease-in-out;
+         -webkit-transition: -webkit-transform 0.3s ease-in-out;
+         transition: transform 0.3s ease-in-out;
+         }&gt; a {
+         text-align: center;
+         font-weight: 700;
+         padding: 2em;
+         display: block;
+         text-decoration: none;
+         color: #fff;
+         -webkit-transition: background-color 0.5s ease-in-out;
+         }
+         .gitb{
+         text-align: center;
+         font-weight: 700;
+         padding: 2em;
+         display: block;
+         text-decoration: none;
+         color: #fff;
+         width: 90vw;
+         margin: auto;
+         background-color: #22313F;
+         border-bottom: 1px solid #2c3e50;
+         }
+         .accordionTitle {
+         width: 90vw;
+         margin: auto;
+         background-color: #22313F;
+         border-bottom: 1px solid #2c3e50;
+         }
+         .accordion dd {
+         background-color: white;
+         color:#fafafa;
+         font-size: 1em;
+         margin-left: 0; 
+         margin: 0px 20px;
+         /* jisme sara text hai o black colour */
+         line-height: 1.5em;
+         }
+         .accordion dd &gt; p {
+         padding: 1em 2em 1em 2em;
+         }
+         .accordion {
+         position: relative;
+         background-color: white; /* gap between those */
+         }
+         .git{
+         display: block;
+         width: 90%;
+         margin: auto;
+         border-radius: 40px;
+         padding-top: 15px;
+         text-decoration: none;
+         height: 60px;
+         text-align: center;
+         margin-top: 30px;
+         border: 1px solid black;
+         }
+         .container {
+         max-width: 960px;
+         margin: 0 auto;
+         padding: 2em 0 2em 0;
+         }
+         .accordionTitle {
+         background-color: #22313F;
+         border-bottom: 1px solid #2c3e50;
+         }
+         .accordionTitle:before {
+         content: "+";
+         font-size: 1.5em;
+         line-height: 0.5em;
+         float: left;
+         -moz-transition: -moz-transform 0.3s ease-in-out;
+         -o-transition: -o-transform 0.3s ease-in-out;
+         -webkit-transition: -webkit-transform 0.3s ease-in-out;
+         transition: transform 0.3s ease-in-out;
+         }
+         .accordionTitle:hover {
+         background-color: #2c3e50;
+         }
+         .accordionTitleActive {
+         background-color:#34495e;
+         }
+         .accordionTitleActive:before {
+         -webkit-transform: rotate(-225deg);
+         -moz-transform: rotate(-225deg);
+         transform: rotate(-225deg);
+         }
+         .accordionItem {
+         height: auto;
+         overflow: hidden;
+         }
+         @media all {
+         .accordionItem {
+         max-height: 50em;
+         -moz-transition: max-height 1s;
+         -o-transition: max-height 1s;
+         -webkit-transition: max-height 1s;
+         transition: max-height 1s;
+         }
+         }
+         @media screen and (min-width: 48em) {
+         .accordionItem {
+         max-height: 15em;
+         -moz-transition: max-height 0.5s;
+         -o-transition: max-height 0.5s;
+         -webkit-transition: max-height 0.5s;
+         transition: max-height 0.5s;
+         }
+         }
+         .accordionItemCollapsed {
+         max-height: 0;
+         }
+         .animateIn {
+         -webkit-animation-name: accordionIn;
+         -webkit-animation-duration: 0.65s;
+         -webkit-animation-iteration-count: 1;
+         -webkit-animation-direction: normal;
+         -webkit-animation-timing-function: ease-in-out;
+         -webkit-animation-fill-mode: both;
+         -webkit-animation-delay: 0s;
+         -moz-animation-name: normal;
+         -moz-animation-duration: 0.65s;
+         -moz-animation-iteration-count: 1;
+         -moz-animation-direction: alternate;
+         -moz-animation-timing-function: ease-in-out;
+         -moz-animation-fill-mode: both;
+         -moz-animation-delay: 0s;
+         animation-name: accordionIn;
+         animation-duration: 0.65s;
+         animation-iteration-count: 1;
+         animation-direction: normal;
+         animation-timing-function: ease-in-out;
+         animation-fill-mode: both;
+         animation-delay: 0s;
+         }
+         .animateOut {
+         -webkit-animation-name: accordionOut;
+         -webkit-animation-duration: 0.75s;
+         -webkit-animation-iteration-count: 1;
+         -webkit-animation-direction: alternate;
+         -webkit-animation-timing-function: ease-in-out;
+         -webkit-animation-fill-mode: both;
+         -webkit-animation-delay: 0s;
+         -moz-animation-name: accordionOut;
+         -moz-animation-duration: 0.75s;
+         -moz-animation-iteration-count: 1;
+         -moz-animation-direction: alternate;
+         -moz-animation-timing-function: ease-in-out;
+         -moz-animation-fill-mode: both;
+         -moz-animation-delay: 0s;
+         animation-name: accordionOut;
+         animation-duration: 0.75s;
+         animation-iteration-count: 1;
+         animation-direction: alternate;
+         animation-timing-function: ease-in-out;
+         animation-fill-mode: both;
+         animation-delay: 0s;
+         }
+         @-webkit-keyframes accordionIn {
+         0% {
+         opacity: 0;
+         -webkit-transform: scale(0.8);
+         }
+         100% {
+         opacity: 1;
+         -webkit-transform: scale(1);
+         }
+         }
+         @-moz-keyframes accordionIn {
+         0% {
+         opacity: 0;
+         -moz-transform: scale(0.8);
+         }
+         100% {
+         opacity: 1;
+         -moz-transform: scale(1);
+         }
+         }
+         @keyframes accordionIn {
+         0% {
+         opacity: 0;
+         transform: scale(0.8);
+         }
+         100% {
+         opacity: 1;
+         transform: scale(1);
+         }
+         }
+         @-webkit-keyframes accordionOut {
+         0% {
+         opacity: 1;
+         -webkit-transform: scale(1);
+         }
+         100% {
+         opacity: 0;
+         -webkit-transform: scale(0.8);
+         }
+         }
+         @-moz-keyframes accordionOut {
+         0% {
+         opacity: 1;
+         -moz-transform: scale(1);
+         }
+         100% {
+         opacity: 0;
+         -moz-transform: scale(0.8);
+         }
+         }
+         @keyframes accordionOut {
+         0% {
+         opacity: 1;
+         transform: scale(1);
+         }
+         100% {
+         opacity: 0;
+         transform: scale(0.8);
+         }
+         }
+      &lt;/style&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+      &lt;div class="container"&gt;
+         &lt;h1&gt;Simple Flat UI CSS Accordion&lt;/h1&gt;
+         &lt;div class="accordion"&gt;
+            &lt;dt&gt;&lt;a href="#" class="accordionTitle"&gt;Test Simple Flat UI CSS Accordion 2&lt;/a&gt;&lt;/dt&gt;
+            &lt;dd class="accordionItem accordionItemCollapsed"&gt;
+
+               &lt;a href="" class="git"&gt;link 39&lt;/a&gt;
+               &lt;a href="" class="git"&gt;link 40&lt;/a&gt;
+               &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab quaerat fugit sed quisquam ut accusamus tempora amet. Ea totam, eos!&lt;/p&gt;
+               
+           &lt;/dd&gt;
+            &lt;br&gt;
+            &lt;a href="https://youtu.be/ciTmo7K5OVo?feature=shared" class="gitb"&gt;Test Simple Flat UI CSS Accordion 3&lt;/a&gt;
+            &lt;br&gt;
+            &lt;dt&gt;&lt;a href="#" class="accordionTitle"&gt;Test Simple Flat UI CSS Accordion 3&lt;/a&gt;&lt;/dt&gt;
+            &lt;dd class="accordionItem accordionItemCollapsed"&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;    5 &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+            &lt;/dd&gt;
+          
+            &lt;br&gt;
+            &lt;dt&gt;&lt;a href="#" class="accordionTitle"&gt;Test Simple Flat UI CSS Accordion 3&lt;/a&gt;&lt;/dt&gt;
+            &lt;dd class="accordionItem accordionItemCollapsed"&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;    5 &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+               &lt;a href="   " class="git"&gt;     &lt;/a&gt;
+            &lt;/dd&gt;
+          
+            
+
+            &lt;br&gt;
+            
+ &lt;dt&gt;&lt;a href="#" class="accordionTitle"&gt;Test Simple Flat UI CSS Accordion 3&lt;/a&gt;&lt;/dt&gt;
+       &lt;dd class="accordionItem accordionItemCollapsed"&gt;
+ &lt;br&gt;
+&lt;div class="response"&gt;
+&lt;pre&gt;&lt;code style="background: black;" class="language-javascript"&gt;
+&amp;lt; &amp;gt;jsksjsjsjsjsksjsjsjksskkssksksjkddkdkdkjdjdjds
+djjddjdj.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+...
+.
+ 
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ ......
+ 
+ 
+ 
+ 
+ 
+ .
+ 
+ ..
+ 
+ ...
+ 
+ ..
+ 
+ .
+ 
+ .
+ 
+ .
+ .
+ 
+ 
+ 
+ 
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;button class="copy-button"&gt;Copy.    &lt;/button&gt;
+&lt;/div&gt;
+&lt;br&gt;
+ 
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+
+ &lt;/dd&gt;
+ 
+            
+            
+            
+            
+   
+     &lt;br&gt;
+     
+  &lt;a href=" https://youtube4kdownloader.com/en62/download-hls-mp4.html " class="gitb"&gt;Test Simple Flat UI CSS Accordion 3&lt;/a&gt;
+  
+   &lt;br&gt;
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   &lt;h1&gt;goood&lt;/h1&gt;
+   
+   
+   
+   
+   
+            
+         &lt;/div&gt;
+      &lt;/div&gt;&lt;script&gt;
+        /*!
+         * classie - class helper functions
+         * from bonzo https://github.com/ded/bonzo
+         *
+         * classie.has( elem, 'my-class' ) -&gt; true/false
+         * classie.add( elem, 'my-new-class' )
+         * classie.remove( elem, 'my-unwanted-class' )
+         * classie.toggle( elem, 'my-class' )
+         */
+      
+        /*jshint browser: true, strict: true, undef: true */
+        /*global define: false */
+        (function(window) {
+          'use strict';
+      
+          function classReg(className) {
+            return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
+          }
+          var hasClass, addClass, removeClass;
+      
+          if ('classList' in document.documentElement) {
+            hasClass = function(elem, c) {
+              return elem.classList.contains(c);
+            };
+            addClass = function(elem, c) {
+              elem.classList.add(c);
+            };
+            removeClass = function(elem, c) {
+              elem.classList.remove(c);
+            };
+          } else {
+            hasClass = function(elem, c) {
+              return classReg(c).test(elem.className);
+            };
+            addClass = function(elem, c) {
+              if (!hasClass(elem, c)) {
+                elem.className = elem.className + ' ' + c;
+              }
+            };
+            removeClass = function(elem, c) {
+              elem.className = elem.className.replace(classReg(c), ' ');
+            };
+          }
+      
+          function toggleClass(elem, c) {
+            var fn = hasClass(elem, c) ? removeClass : addClass;
+            fn(elem, c);
+          }
+          var classie = {
+            hasClass: hasClass,
+            addClass: addClass,
+            removeClass: removeClass,
+            toggleClass: toggleClass,
+            has: hasClass,
+            add: addClass,
+            remove: removeClass,
+            toggle: toggleClass
+          };
+          if (typeof define === 'function' &amp;&amp; define.amd) {
+            define(classie);
+          } else {
+            window.classie = classie;
+          }
+        })(window);
+        var $ = function(selector) {
+          return document.querySelector(selector);
+        }
+        var accordion = $('.accordion');
+        accordion.addEventListener("click", function(e) {
+          e.stopPropagation();
+      
+          if (e.target &amp;&amp; e.target.classList.contains("accordionTitle") &amp;&amp; e.target.nodeName == "A") {
+            e.preventDefault(); // Prevent the default behavior of the anchor element
+      
+            var title = e.target;
+            var content = e.target.parentNode.nextElementSibling;
+            classie.toggle(title, 'accordionTitleActive');
+            if (classie.has(content, 'accordionItemCollapsed')) {
+              if (classie.has(content, 'animateOut')) {
+                classie.remove(content, 'animateOut');
+              }
+              classie.add(content, 'animateIn');
+            } else {
+              classie.remove(content, 'animateIn');
+              classie.add(content, 'animateOut');
+            }
+            classie.toggle(content, 'accordionItemCollapsed');
+          }
+        });
+      &lt;/script&gt;
+      
+        &lt;script&gt;
+    
+    function copyResponseText() {
+      const responseTextElement = this.previousElementSibling;
+      const textToCopy = responseTextElement.innerText;
+
+     
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textToCopy;
+      document.body.appendChild(tempTextArea);
+
+    
+      tempTextArea.select();
+      document.execCommand('copy');
+
+      
+      document.body.removeChild(tempTextArea);
+
+   
+      this.innerText = 'Copied!';
+      setTimeout(() =&gt; {
+        this.innerText = 'Copy';
+      }, 2000);
+    }
+
+
+    const copyButtons = document.querySelectorAll('.copy-button');
+    copyButtons.forEach((button) =&gt; {
+      button.addEventListener('click', copyResponseText);
+    });
+  &lt;/script&gt;
+
+
+
+ 
+   &lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+        <button class="copy-button">Copy. </button>
+    </div>
+    <br>
+
+
+
+
+
+
+
+
+
+
+    <div class="response">
+        <pre><code style="background: black;" class="language-javascript">
+&lt; &gt;
+</code></pre>
+        <button class="copy-button">Copy. </button>
+    </div>
+    <br>
+
+
+    <script>
+        function copyResponseText() {
+            const responseTextElement = this.previousElementSibling;
+            const textToCopy = responseTextElement.innerText;
+
+
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = textToCopy;
+            document.body.appendChild(tempTextArea);
+
+
+            tempTextArea.select();
+            document.execCommand('copy');
+
+
+            document.body.removeChild(tempTextArea);
+
+
+            this.innerText = 'Copied!';
+            setTimeout(() => {
+                this.innerText = 'Copy';
+            }, 2000);
+        }
+
+
+        const copyButtons = document.querySelectorAll('.copy-button');
+        copyButtons.forEach((button) => {
+            button.addEventListener('click', copyResponseText);
+        });
+    </script>
+
+
+
+
+
+</body>
+
+</html>

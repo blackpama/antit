@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Html opener</title>
+    <style>
+        * {
+            outline: none;
+
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        pre {
+            font-family: fantasy;
+            padding: 0;
+            margin: 0;
+
+        }
+
+        pre div {
+            margin-right: 20px;
+        }
+
+        #container {
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            width: 85vw;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.6);
+
+            /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;  */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        #fileName {
+            border: 1px solid;
+            /* Add border to file name input */
+            height: 30px;
+
+            border-radius: 10px;
+            padding: 5px;
+            width: 100px;
+            /* Keep width of the input */
+        }
+
+        /* Hide the default scrollbar */
+        .scrolling-container {
+            display: flex;
+            width: 90vw;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* Internet Explorer and Microsoft Edge */
+        }
+
+        /* Style the scrollbar (optional) */
+        .scrolling-container::-webkit-scrollbar {
+            width: 0;
+            /* Safari and Chrome */
+        }
+
+        /* Style the scrollbar track (optional) */
+        .scrolling-container::-webkit-scrollbar-track {
+            background-color: transparent;
+            /* Safari and Chrome */
+        }
+
+        /* Style the scrollbar thumb (optional) */
+        .scrolling-container::-webkit-scrollbar-thumb {
+            background-color: white;
+            /* Safari and Chrome */
+
+
+
+        }
+
+        #fileFormat {
+            width: 100px;
+            height: 40px;
+
+            border-radius: 10px;
+
+
+        }
+
+
+        label {
+            line-height: 30px;
+
+        }
+
+        textarea {
+            width: 85vw;
+            height: 200px;
+            /* Increase the height of the textarea */
+            border-radius: 5px;
+            padding: 10px;
+            /* Increase padding for the textarea */
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[disabled] {
+            background-color: #ccc;
+            /* Change color for disabled buttons */
+            cursor: not-allowed;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <h1>Text Converter</h1>
+
+    <div id="container">
+        <textarea id="textInput" rows="8" placeholder="Paste your text here..."></textarea>
+        <br>
+
+        <div class="scrolling-container">
+            <!-- Your file name and file format elements here -->
+            <pre><div class="input-container">
+        <div>
+   <label for="fileName">File name</label>
+   <input type="text" id="fileName" placeholder="Enter file name">
+        </div>
+      <div>
+           <label for="fileFormat">File Format</label>
+            <select id="fileFormat">
+            <option value="html"> HTML file (.html)</option>
+            <option value="js">JavaScript file (.js)</option>
+            <option value="css">CSS file (.css)</option>
+            <option value="py">Python file (.py)</option>
+            <option value="txt">Text file (.txt)</option>
+            <option value="md">REDME.md</option>
+          </select>  
+          </div>
+                 <div>
+         <button id="resetButton">Reset</button>
+</div>
+         <div>
+       <input type="file" id="htmlFile" accept=".html"></div>
+      </div> </div></pre>
+            <br>
+
+            <button id="convertButton" onclick="convertTextToFile()" disabled>Convert and Save</button>
+            <br>
+
+            <button id="openButton" onclick="convertTextToTab('html')" disabled>Open in New Tab</button>
+
+        </div>
+        <script>
+            document.getElementById("resetButton").addEventListener("click", function() {
+                document.getElementById("textInput").value = ""; // Reset the textarea content
+            });
+        </script>
+
+        <script>
+            const textInput = document.getElementById('textInput');
+            const fileNameInput = document.getElementById('fileName');
+            const fileFormatSelect = document.getElementById('fileFormat');
+            const convertButton = document.getElementById('convertButton');
+            const openButton = document.getElementById('openButton');
+
+            function enableButtons() {
+                const textNotEmpty = textInput.value.trim() !== '';
+                const fileNameNotEmpty = fileNameInput.value.trim() !== '';
+                const fileFormatNotEmpty = fileFormatSelect.value.trim() !== '';
+
+                if (textNotEmpty) {
+                    convertButton.disabled = false;
+                    convertButton.style.backgroundColor = "#007bff"; // Set the button color to blue
+                } else {
+                    convertButton.disabled = true;
+                    convertButton.style.backgroundColor = "#ccc"; // Set the button color to gray
+                }
+
+                openButton.disabled = !textNotEmpty;
+            }
+
+            textInput.addEventListener('input', enableButtons);
+            fileNameInput.addEventListener('input', enableButtons);
+            fileFormatSelect.addEventListener('change', enableButtons);
+
+            function generateRandomFileName(length) {
+                const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                let result = "";
+                for (let i = 0; i < length; i++) {
+                    const randomIndex = Math.floor(Math.random() * charset.length);
+                    result += charset.charAt(randomIndex);
+                }
+                return result;
+            }
+
+            function convertTextToFile() {
+                const text = textInput.value;
+                const format = fileFormatSelect.value;
+                let fileName = fileNameInput.value.trim();
+
+                // If no custom name provided, generate a random 8-character name
+                if (fileName === "") {
+                    fileName = generateRandomFileName(8);
+                }
+
+                const blob = new Blob([text], { type: 'text/plain' });
+                const downloadLink = document.createElement('a');
+                downloadLink.href = window.URL.createObjectURL(blob);
+                downloadLink.download = `${fileName}.${format}`;
+
+                // Trigger the download
+                downloadLink.style.display = 'none';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            }
+
+            function convertTextToTab(format) {
+                const text = textInput.value;
+
+                // Create a new tab/window and display the converted text
+                const newTab = window.open('', '_blank');
+                newTab.document.write(text);
+                newTab.document.title = `Converted ${format.toUpperCase()}`;
+            }
+        </script>
+        <script>
+            const htmlFileInput = document.getElementById('htmlFile');
+            const textArea = document.getElementById('textInput');
+
+            htmlFileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    textArea.value = e.target.result;
+                };
+
+                reader.readAsText(file);
+            });
+        </script>
+</body>
+
+</html>
